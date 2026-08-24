@@ -1,0 +1,339 @@
+/* Hero */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: var(--nav-height);
+  position: relative;
+}
+
+.heroInner {
+  padding-top: var(--space-20);
+  padding-bottom: var(--space-20);
+  max-width: 780px;
+}
+
+.eyebrow {
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: var(--space-6);
+}
+
+.heroHeadline {
+  font-family: var(--font-serif);
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--color-text);
+  margin-bottom: var(--space-6);
+}
+
+.heroHeadline em {
+  font-style: italic;
+  color: var(--color-accent);
+}
+
+.heroSub {
+  font-size: 1.125rem;
+  color: var(--color-text-muted);
+  max-width: 520px;
+  line-height: 1.75;
+  margin-bottom: var(--space-8);
+}
+
+.heroCta {
+  display: flex;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.heroRule {
+  position: absolute;
+  bottom: var(--space-12);
+  left: var(--space-6);
+  width: 60px;
+  height: 1px;
+  background: var(--color-accent);
+}
+
+/* Buttons */
+.btnPrimary {
+  display: inline-block;
+  padding: var(--space-3) var(--space-8);
+  background: var(--color-accent);
+  color: var(--color-white);
+  font-size: 0.8125rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: 1px solid var(--color-accent);
+  transition: background var(--transition-base), color var(--transition-base);
+}
+
+.btnPrimary:hover {
+  background: var(--color-accent-hover);
+  border-color: var(--color-accent-hover);
+}
+
+.btnSecondary {
+  display: inline-block;
+  padding: var(--space-3) var(--space-8);
+  background: transparent;
+  color: var(--color-text);
+  font-size: 0.8125rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: 1px solid var(--color-border);
+  transition: border-color var(--transition-base), color var(--transition-base);
+}
+
+.btnSecondary:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+/* Section header */
+.sectionHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: var(--space-8);
+}
+
+.sectionTitle {
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-weight: 400;
+}
+
+.seeAll {
+  font-size: 0.8125rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  transition: color var(--transition-base);
+}
+
+.seeAll:hover { color: var(--color-accent-hover); }
+
+/* Featured projects */
+.featured {
+  padding: var(--space-20) 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.projectGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+
+.projectCard {
+  display: block;
+  cursor: pointer;
+}
+
+.projectCard.large {
+  grid-column: span 2;
+}
+
+.projectImage {
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  background: var(--color-surface);
+  margin-bottom: var(--space-4);
+}
+
+.projectCard.large .projectImage {
+  aspect-ratio: 16/9;
+}
+
+.imagePlaceholder {
+  width: 100%;
+  height: 100%;
+  background: var(--color-surface);
+  display: flex;
+  align-items: flex-end;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  transition: background var(--transition-slow);
+}
+
+.projectCard:hover .imagePlaceholder {
+  background: var(--color-border);
+}
+
+.placeholderLabel {
+  font-size: 0.6875rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.projectMeta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.projectCategory {
+  font-size: 0.6875rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.projectTitle {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 400;
+}
+
+.projectLocation {
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+}
+
+/* Philosophy */
+.philosophy {
+  padding: var(--space-24) 0;
+  background: var(--color-surface);
+}
+
+.philosophyInner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-16);
+  align-items: start;
+}
+
+.philosophyText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.philosophyTitle {
+  font-family: var(--font-serif);
+  font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+  font-weight: 400;
+  line-height: 1.15;
+}
+
+.philosophyText p {
+  color: var(--color-text-muted);
+  line-height: 1.8;
+}
+
+.philosophyStats {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  padding-top: var(--space-4);
+  border-left: 1px solid var(--color-border);
+  padding-left: var(--space-12);
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.statNumber {
+  font-family: var(--font-serif);
+  font-size: 3rem;
+  font-weight: 400;
+  color: var(--color-accent);
+  line-height: 1;
+}
+
+.statLabel {
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  letter-spacing: 0.05em;
+}
+
+/* Services teaser */
+.serviceTeaser {
+  padding: var(--space-24) 0;
+}
+
+.serviceGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border: 1px solid var(--color-border);
+  margin-top: var(--space-8);
+}
+
+.serviceItem {
+  padding: var(--space-8);
+  border-right: 1px solid var(--color-border);
+}
+
+.serviceItem:last-child { border-right: none; }
+
+.serviceItemTitle {
+  font-family: var(--font-serif);
+  font-size: 1.125rem;
+  font-weight: 400;
+  margin-bottom: var(--space-3);
+}
+
+.serviceItemDesc {
+  font-size: 0.9375rem;
+  color: var(--color-text-muted);
+  line-height: 1.75;
+}
+
+.serviceCta {
+  margin-top: var(--space-8);
+  text-align: right;
+}
+
+@media (max-width: 1024px) {
+  .projectGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .projectCard.large {
+    grid-column: span 2;
+  }
+  .serviceGrid {
+    grid-template-columns: 1fr;
+  }
+  .serviceItem {
+    border-right: none;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .serviceItem:last-child { border-bottom: none; }
+}
+
+@media (max-width: 768px) {
+  .projectGrid {
+    grid-template-columns: 1fr;
+  }
+  .projectCard.large {
+    grid-column: span 1;
+  }
+  .philosophyInner {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+  .philosophyStats {
+    border-left: none;
+    padding-left: 0;
+    border-top: 1px solid var(--color-border);
+    padding-top: var(--space-8);
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--space-6);
+  }
+  .sectionHeader {
+    flex-direction: column;
+    gap: var(--space-2);
+    align-items: flex-start;
+  }
+}
