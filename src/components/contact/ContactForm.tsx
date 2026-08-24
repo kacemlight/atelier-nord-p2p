@@ -61,7 +61,7 @@ export default function ContactForm() {
 
   if (submitted) {
     return (
-      <div className={styles.success}>
+      <div className={styles.success} data-testid="contact-form-success">
         <p className={styles.successIcon} aria-hidden="true">—</p>
         <h2 className={styles.successTitle}>Thank you, {form.name.split(' ')[0]}.</h2>
         <p className={styles.successText}>
@@ -72,7 +72,12 @@ export default function ContactForm() {
   }
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit} noValidate>
+    <form
+      className={styles.form}
+      onSubmit={handleSubmit}
+      noValidate
+      data-testid="contact-form"
+    >
       <div className={styles.field}>
         <label htmlFor="name" className={styles.label}>Full name</label>
         <input
@@ -85,8 +90,13 @@ export default function ContactForm() {
           className={`${styles.input} ${errors.name ? styles.inputError : ''}`}
           aria-describedby={errors.name ? 'name-error' : undefined}
           aria-invalid={!!errors.name}
+          data-testid="contact-input-name"
         />
-        {errors.name && <p id="name-error" className={styles.error} role="alert">{errors.name}</p>}
+        {errors.name && (
+          <p id="name-error" className={styles.error} role="alert" data-testid="contact-error-name">
+            {errors.name}
+          </p>
+        )}
       </div>
 
       <div className={styles.field}>
@@ -101,8 +111,13 @@ export default function ContactForm() {
           className={`${styles.input} ${errors.email ? styles.inputError : ''}`}
           aria-describedby={errors.email ? 'email-error' : undefined}
           aria-invalid={!!errors.email}
+          data-testid="contact-input-email"
         />
-        {errors.email && <p id="email-error" className={styles.error} role="alert">{errors.email}</p>}
+        {errors.email && (
+          <p id="email-error" className={styles.error} role="alert" data-testid="contact-error-email">
+            {errors.email}
+          </p>
+        )}
       </div>
 
       <div className={styles.row}>
@@ -114,6 +129,7 @@ export default function ContactForm() {
             value={form.projectType}
             onChange={handleChange}
             className={styles.select}
+            data-testid="contact-select-projectType"
           >
             {PROJECT_TYPES.map((t) => (
               <option key={t} value={t}>{t}</option>
@@ -129,6 +145,7 @@ export default function ContactForm() {
             value={form.budgetRange}
             onChange={handleChange}
             className={styles.select}
+            data-testid="contact-select-budgetRange"
           >
             {BUDGET_RANGES.map((b) => (
               <option key={b} value={b}>{b}</option>
@@ -149,11 +166,16 @@ export default function ContactForm() {
           placeholder="Tell us about the space, the timeline, and what you hope for."
           aria-describedby={errors.message ? 'message-error' : undefined}
           aria-invalid={!!errors.message}
+          data-testid="contact-textarea-message"
         />
-        {errors.message && <p id="message-error" className={styles.error} role="alert">{errors.message}</p>}
+        {errors.message && (
+          <p id="message-error" className={styles.error} role="alert" data-testid="contact-error-message">
+            {errors.message}
+          </p>
+        )}
       </div>
 
-      <button type="submit" className={styles.submit}>
+      <button type="submit" className={styles.submit} data-testid="contact-submit">
         Send enquiry
       </button>
     </form>

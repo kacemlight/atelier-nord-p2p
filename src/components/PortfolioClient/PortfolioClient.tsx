@@ -16,8 +16,13 @@ export function PortfolioClient({ projects, categories }: Props) {
   const filtered = active === 'All' ? projects : projects.filter(p => p.category === active);
 
   return (
-    <div>
-      <div className={styles.filters} role="tablist" aria-label="Filter projects by category">
+    <div data-testid="portfolio-client">
+      <div
+        className={styles.filters}
+        role="tablist"
+        aria-label="Filter projects by category"
+        data-testid="portfolio-filter-bar"
+      >
         {(['All', ...categories] as const).map((cat) => (
           <button
             key={cat}
@@ -25,12 +30,13 @@ export function PortfolioClient({ projects, categories }: Props) {
             aria-selected={active === cat}
             className={`${styles.filter} ${active === cat ? styles.active : ''}`}
             onClick={() => setActive(cat as ProjectCategory | 'All')}
+            data-testid={`portfolio-filter-${cat.toLowerCase()}`}
           >
             {cat}
           </button>
         ))}
       </div>
-      <div className={styles.grid}>
+      <div className={styles.grid} data-testid="portfolio-grid">
         {filtered.map((project, i) => (
           <ProjectCard key={project.id} project={project} priority={i < 2} />
         ))}
