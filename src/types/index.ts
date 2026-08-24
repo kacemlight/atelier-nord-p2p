@@ -47,10 +47,20 @@ export interface PressMention {
   url?: string;
 }
 
+/** Used by src/data/press.ts */
+export interface PressItem {
+  id: string;
+  publication: string;
+  title: string;
+  year: number;
+  url?: string;
+}
+
 export interface Founder {
   id: string;
   name: string;
-  role: string;
+  /** Display title, e.g. "Co-Founder & Design Director" */
+  title: string;
   bio: string;
   expertise: string[];
 }
@@ -70,24 +80,32 @@ export type BudgetRange =
   | '500k-plus'
   | 'to-discuss';
 
-export interface InquiryFormData {
-  name: string;
+/** Form state used by InquiryForm component */
+export interface InquiryForm {
+  firstName: string;
+  lastName: string;
   email: string;
   phone?: string;
-  projectType: ProjectType;
-  budgetRange: BudgetRange;
+  projectType: ProjectType | '';
+  budgetRange: BudgetRange | '';
   location: string;
   message: string;
 }
 
-export interface InquiryFormErrors {
-  name?: string;
+/** Field-level validation errors for InquiryForm */
+export interface FormErrors {
+  firstName?: string;
+  lastName?: string;
   email?: string;
   projectType?: string;
   budgetRange?: string;
   location?: string;
   message?: string;
 }
+
+/** Legacy alias kept for backwards compat */
+export type InquiryFormData = InquiryForm;
+export type InquiryFormErrors = FormErrors;
 
 // ─── Navigation Types ──────────────────────────────────────────────────────
 
