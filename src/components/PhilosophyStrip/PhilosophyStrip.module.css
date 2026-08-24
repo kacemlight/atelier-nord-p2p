@@ -1,0 +1,62 @@
+.section {
+  background-color: var(--color-bg-secondary);
+  border-top: 1px solid var(--color-border-subtle);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.intro {
+  margin-bottom: var(--space-16);
+  max-width: 560px;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(var(--text-2xl), 3vw, var(--text-4xl));
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--leading-snug);
+  color: var(--color-text-primary);
+  margin-top: var(--space-4);
+}
+
+.pillars {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-12);
+}
+
+.pillar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.number {
+  font-family: var(--font-display);
+  font-size: var(--text-4xl);
+  font-weight: 300;
+  color: var(--color-border);
+  line-height: 1;
+  letter-spacing: var(--tracking-tight);
+}
+
+.pillarTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 400;
+  color: var(--color-text-primary);
+  letter-spacing: var(--tracking-tight);
+}
+
+.pillarBody {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  line-height: var(--leading-relaxed);
+}
+
+@media (max-width: 768px) {
+  .pillars {
+    grid-template-columns: 1fr;
+    gap: var(--space-10);
+  }
+}
