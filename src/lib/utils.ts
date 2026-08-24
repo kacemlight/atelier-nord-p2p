@@ -1,61 +1,45 @@
-import type { FormErrors, InquiryForm } from '@/types';
+/**
+ * Utility helpers — pure functions, zero side-effects.
+ */
 
 /**
- * Validate the inquiry form fields client-side.
- * Returns an object of field-level error messages.
+ * Join class names, filtering out falsy values.
+ * Usage: cn('base-class', condition && 'conditional-class')
  */
-export function validateInquiryForm(values: InquiryForm): FormErrors {
-  const errors: FormErrors = {};
-
-  if (!values.firstName.trim()) {
-    errors.firstName = 'First name is required.';
-  }
-
-  if (!values.lastName.trim()) {
-    errors.lastName = 'Last name is required.';
-  }
-
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!values.email.trim()) {
-    errors.email = 'Email address is required.';
-  } else if (!emailRegex.test(values.email)) {
-    errors.email = 'Please enter a valid email address.';
-  }
-
-  if (!values.projectType) {
-    errors.projectType = 'Please select a project type.';
-  }
-
-  if (!values.budgetRange) {
-    errors.budgetRange = 'Please select a budget range.';
-  }
-
-  if (!values.message.trim()) {
-    errors.message = 'Please tell us about your project.';
-  } else if (values.message.trim().length < 20) {
-    errors.message = 'Please provide a bit more detail (at least 20 characters).';
-  }
-
-  return errors;
-}
-
-/**
- * Check whether a form errors object has any entries.
- */
-export function hasErrors(errors: FormErrors): boolean {
-  return Object.keys(errors).length > 0;
-}
-
-/**
- * Format a project area string for display.
- */
-export function formatArea(area: string): string {
-  return area;
-}
-
-/**
- * Generate a CSS class string from multiple optional classes.
- */
-export function cn(...classes: (string | undefined | false | null)[]): string {
+export function cn(...classes: (string | boolean | undefined | null)[]): string {
   return classes.filter(Boolean).join(' ');
+}
+
+/**
+ * Format a year number for display.
+ */
+export function formatYear(year: number): string {
+  return year.toString();
+}
+
+/**
+ * Format an area in square metres.
+ */
+export function formatArea(area: number): string {
+  return `${area} m²`;
+}
+
+/**
+ * Slugify a string — lowercase, hyphens, no special characters.
+ */
+export function slugify(str: string): string {
+  return str
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+/**
+ * Truncate a string to a maximum length, appending ellipsis.
+ */
+export function truncate(str: string, maxLength: number): string {
+  if (str.length <= maxLength) return str;
+  return str.slice(0, maxLength).trimEnd() + '…';
 }
