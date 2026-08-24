@@ -1,47 +1,35 @@
-import Nav from '@/components/layout/Nav';
-import Footer from '@/components/layout/Footer';
-import PortfolioClient from '@/components/portfolio/PortfolioClient';
-import { projects } from '@/data/projects';
+import { Metadata } from 'next';
+import { PortfolioClient } from '@/components/PortfolioClient/PortfolioClient';
+import { projects, categories } from '@/lib/projects';
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Portfolio',
-  description: 'Selected interior design projects by Atelier Nord — residential, hospitality, and commercial.'
+  description: 'Browse Atelier Nord projects across residential, hospitality, and commercial categories.',
 };
 
 export default function PortfolioPage() {
   return (
-    <>
-      <Nav />
-      <main style={{ paddingTop: 'var(--nav-height)' }}>
+    <div style={{ paddingTop: 'var(--nav-height)' }}>
+      <section className="section">
         <div className="container">
-          <div style={{ paddingTop: 'var(--space-16)', paddingBottom: 'var(--space-8)' }}>
-            <p style={{
-              fontSize: '0.75rem',
-              letterSpacing: '0.2em',
-              textTransform: 'uppercase',
-              color: 'var(--color-accent)',
-              marginBottom: 'var(--space-4)'
-            }}>Our work</p>
-            <h1 style={{
-              fontFamily: 'var(--font-serif)',
-              fontSize: 'clamp(2rem, 5vw, 3.5rem)',
-              fontWeight: 400,
-              marginBottom: 'var(--space-6)'
-            }}>Portfolio</h1>
-            <p style={{
-              color: 'var(--color-text-muted)',
-              maxWidth: '540px',
-              lineHeight: 1.75
-            }}>
-              Forty-plus projects across France and beyond. Each one begins with
-              a listening phase — the architecture, the client, the light — and
-              ends with an interior that belongs exactly where it is.
-            </p>
-          </div>
+          <p className="eyebrow">Our Work</p>
+          <h1 style={{
+            fontFamily: 'var(--font-display)',
+            fontWeight: 300,
+            fontSize: 'clamp(2.25rem, 5vw, 4.5rem)',
+            letterSpacing: 'var(--tracking-tight)',
+            lineHeight: 'var(--leading-tight)',
+            color: 'var(--color-text-primary)',
+            marginTop: 'var(--space-4)',
+            marginBottom: 'var(--space-16)',
+          }}>
+            Every project, a distinct brief.
+            <br />
+            <em style={{ fontStyle: 'italic', color: 'var(--color-accent)' }}>One constant standard.</em>
+          </h1>
+          <PortfolioClient projects={projects} categories={categories} />
         </div>
-        <PortfolioClient projects={projects} />
-      </main>
-      <Footer />
-    </>
+      </section>
+    </div>
   );
 }
