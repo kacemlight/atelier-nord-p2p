@@ -1,54 +1,97 @@
-import { describe, it, expect } from 'vitest';
-import { getProject } from '../../src/lib/getProject';
-import { PROJECTS } from '../../src/data/projects';
+/**
+ * Unit tests for src/lib/getProject.ts
+ * Tests the getProject(id) adapter against the actual project data.
+ * Runner: Jest (ts-jest)
+ */
+import { getProject, projects } from '../../src/lib/getProject';
 
 describe('getProject', () => {
-  it('returns the correct project for a valid slug', () => {
-    const first = PROJECTS[0];
-    const result = getProject(first.slug);
-    expect(result).toBeDefined();
-    expect(result?.slug).toBe(first.slug);
-    expect(result?.name).toBe(first.name);
+  describe('happy path', () => {
+    it('returns the correct project for a valid id', () => {
+      const first = projects[0];
+      const result = getProject(first.id);
+      expect(result).toBeDefined();
+      expect(result?.id).toBe(first.id);
+      expect(result?.title).toBe(first.title);
+    });
+
+    it('finds each of the 6 seeded projects by id', () => {
+      // The seed data has 6 projects; verify all are retrievable
+      expect(projects).toHaveLength(6);
+      projects.forEach((project) => {
+        const result = getProject(project.id);
+        expect(result).toBeDefined();
+        expect(result?.id).toBe(project.id);
+      });
+    });
+
+    it('returns a project with all required typed fields', () => {
+      const result = getProject(projects[0].id);
+      expect(result).toBeDefined();
+      if (!result) return;
+      expect(typeof result.id).toBe('string');
+      expect(typeof result.slug).toBe('string');
+      expect(typeof result.title).toBe('string');
+      expect(['residential', 'hospitality', 'commercial']).toContain(result.category);
+      expect(typeof result.year).toBe('number');
+      expect(result.year).toBeGreaterThan(2000);
+      expect(typeof result.location).toBe('string');
+      expect(typeof result.description).toBe('string');
+      expect(Array.isArray(result.deliverables)).toBe(true);
+      expect(result.deliverables.length).toBeGreaterThanOrEqual(1);
+    });
+
+    it('returns a project with a boolean featured field', () => {
+      const result = getProject(projects[0].id);
+      expect(result).toBeDefined();
+      expect(typeof result?.featured).toBe('boolean');
+    });
+
+    it('returns a project with a valid imageAspect field', () => {
+      const result = getProject(projects[0].id);
+      expect(['16/9', '4/3', '3/4']).toContain(result?.imageAspect);
+    });
   });
 
-  it('returns undefined for an unknown slug', () => {
-    const result = getProject('does-not-exist');
-    expect(result).toBeUndefined();
+  describe('edge cases', () => {
+    it('returns undefined for an unknown id', () => {
+      const result = getProject('does-not-exist');
+      expect(result).toBeUndefined();
+    });
+
+    it('returns undefined for an empty string id', () => {
+      const result = getProject('');
+      expect(result).toBeUndefined();
+    });
+
+    it('is case-sensitive — uppercase id does not match', () => {
+      const first = projects[0];
+      const result = getProject(first.id.toUpperCase());
+      // Ids are lowercase slugs; uppercase lookup should not match
+      expect(result).toBeUndefined();
+    });
   });
 
-  it('returns undefined for an empty string slug', () => {
-    const result = getProject('');
-    expect(result).toBeUndefined();
-  });
+  describe('data integrity', () => {
+    it('every project has a non-empty slug', () => {
+      projects.forEach((p) => {
+        expect(p.slug).toBeTruthy();
+        expect(p.slug.length).toBeGreaterThan(0);
+      });
+    });
 
-  it('returns a project with all required fields populated', () => {
-    const result = getProject(PROJECTS[0].slug);
-    expect(result).toBeDefined();
-    if (!result) return;
-    expect(typeof result.slug).toBe('string');
-    expect(typeof result.name).toBe('string');
-    expect(['Residential', 'Hospitality', 'Commercial']).toContain(result.category);
-    expect(typeof result.year).toBe('number');
-    expect(result.year).toBeGreaterThan(2000);
-    expect(typeof result.location).toBe('string');
-    expect(Array.isArray(result.description)).toBe(true);
-    expect(result.description.length).toBeGreaterThanOrEqual(1);
-    expect(Array.isArray(result.scope)).toBe(true);
-    expect(Array.isArray(result.materials)).toBe(true);
-  });
+    it('every project year is a plausible recent year', () => {
+      projects.forEach((p) => {
+        expect(p.year).toBeGreaterThanOrEqual(2015);
+        expect(p.year).toBeLessThanOrEqual(new Date().getFullYear());
+      });
+    });
 
-  it('finds each of the 6 seeded projects by slug (AC-04, AC-05)', () => {
-    const expectedSlugs = [
-      'villa-thorvald',
-      'hotel-des-lames',
-      'atelier-bergerac',
-      'maison-solberg',
-      'le-refuge-hotel',
-      'studio-caillebotte',
-    ];
-    for (const slug of expectedSlugs) {
-      const result = getProject(slug);
-      expect(result, `Expected project with slug "${slug}" to exist`).toBeDefined();
-    }
+    it('category values match the ProjectCategory union type', () => {
+      const validCategories = ['residential', 'hospitality', 'commercial'];
+      projects.forEach((p) => {
+        expect(validCategories).toContain(p.category);
+      });
+    });
   });
 });
