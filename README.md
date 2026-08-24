@@ -44,8 +44,31 @@ npm run start
 
 ### Run Tests
 
+**Unit & component tests** (Jest + React Testing Library — runs in every CI/CD pipeline):
+
 ```bash
 npm test
+```
+
+This executes all `*.test.ts` / `*.test.tsx` files under `src/__tests__/` and `__tests__/` using Jest 29 with `jest-environment-jsdom`. The flag `--passWithNoTests` prevents CI failure when a module's test file is pending. Coverage spans:
+
+- Core data / logic: `src/lib/projects.ts`, `src/lib/validation.ts`, `src/data/founders.ts`
+- Interface components: `ContactForm`, `PortfolioFilter`, `ProjectCard`, `ServiceCard`, `Nav`
+- Page integration: Home, Portfolio, Services, About, Contact
+
+**E2E tests** (Playwright — optional, not required for core CI):
+
+```bash
+npx playwright install   # first time only
+npx playwright test
+```
+
+Playwright specs live in `tests/e2e/` and cover: navigation, portfolio filter, contact-form validation, and dark-mode toggle. Playwright is not listed in `devDependencies` by default; install it locally when full end-to-end verification is needed. See DECISIONS.md D-010 for the rationale.
+
+### Lint
+
+```bash
+npm run lint
 ```
 
 ---
@@ -83,16 +106,22 @@ atelier-nord-p2p/
 │   │   └── globals.css           # Design tokens (light + dark)
 │   └── types/
 │       └── index.ts              # Shared TypeScript interfaces
-├── __tests__/                    # Test suite
+├── __tests__/                    # Jest unit + component tests
 │   ├── validation.test.ts
 │   ├── projects.test.ts
 │   └── components/
 │       ├── ContactForm.test.tsx
 │       └── PortfolioFilter.test.tsx
+├── tests/
+│   └── e2e/                      # Playwright E2E specs (optional)
+│       ├── navigation.spec.ts
+│       ├── portfolio-filter.spec.ts
+│       ├── contact-form.spec.ts
+│       └── dark-mode.spec.ts
 ├── SPEC.md                       # Scope and feature requirements
 ├── ARCHITECTURE.md               # Module boundaries, interfaces, style tokens
 ├── DECISIONS.md                  # Key technical choices with rationale
-├── REVIEW.md                     # Code review findings
+├── REVIEW.md                     # Code review findings (Priya, QA lane)
 └── BUILD_REPORT.md               # What shipped, what was cut, production URL
 ```
 
@@ -142,6 +171,7 @@ Detected from `prefers-color-scheme`; manually toggled via the header button. Pr
 2. **Update copy:** page text lives in the page components; reusable copy constants in `src/data/`.
 3. **Add a service:** extend the array in `src/data/services.ts`.
 4. **New page:** follow App Router conventions; add a nav link in `src/components/Nav.tsx`.
+5. **Enable form email transport:** replace the `handleSubmit` stub in `InquiryForm.tsx` with a `fetch` to a Next.js API route or third-party service (Resend, Formspree).
 
 ---
 
@@ -152,7 +182,7 @@ Auto-deploys on every push to `main` via the Vercel GitHub integration.
 - **Framework:** Next.js 14
 - **Build command:** `npm run build`
 - **Node version:** 18.x
-- **Environment variables:** none required
+- **Environment variables:** none required for the static site
 
 ---
 
