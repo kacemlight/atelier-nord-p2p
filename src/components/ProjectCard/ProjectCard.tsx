@@ -11,21 +11,17 @@ export function ProjectCard({ project }: Props) {
   return (
     <Link href={`/portfolio/${project.id}`} className={styles.card}>
       <div
-        className={styles.image}
+        className={styles.cover}
         style={{ backgroundColor: project.coverColor }}
-        aria-label={`${project.title} project image`}
-      >
-        <div className={styles.imageOverlay} />
-        <div className={styles.imagePlaceholder} aria-hidden="true">
-          <span className={styles.placeholderYear}>{project.year}</span>
-        </div>
-      </div>
-      <div className={styles.meta}>
+        aria-hidden="true"
+      />
+      <div className={styles.info}>
         <span className={styles.category}>{project.category}</span>
         <h3 className={styles.title}>{project.title}</h3>
-        <p className={styles.location}>{project.location}</p>
-        <p className={styles.excerpt}>{project.description}</p>
-        <span className={styles.cta}>View Project →</span>
+        <div className={styles.meta}>
+          <span>{project.location}</span>
+          <span>{project.year}</span>
+        </div>
       </div>
     </Link>
   );
