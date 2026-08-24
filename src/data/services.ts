@@ -2,121 +2,112 @@ import type { Service } from '@/types';
 
 export const services: Service[] = [
   {
-    id: 's1',
+    id: 'full-design',
     title: 'Full Interior Design',
-    subtitle: 'From blank canvas to finished room',
     description:
-      'Our comprehensive design service covers every layer of a project — spatial planning, material selection, furniture design, lighting, and styling. We act as the single point of coordination for all specialist trades, and we do not consider a project complete until the space is photographed and every snag is resolved. This is the service for clients who want to hand over the complexity and receive a home or hospitality space that could not have been made without us.',
-    deliverables: [
-      'Full concept presentation with mood boards and spatial renders',
-      'Material and finish schedules',
-      'Custom furniture design and sourcing',
-      'Lighting design and specification',
-      'Trade coordination and site supervision',
-      'Styling and final installation',
-      'Post-project documentation pack',
-    ],
-    process: [
+      'End-to-end design direction from first brief to final installation. We take a project from its raw condition — architectural, spatial, atmospheric — and carry it through every decision to a finished interior. This is the complete service: concept, specification, contractor coordination, and installation oversight. Nothing left to chance, nothing delegated to chance.',
+    processSteps: [
       {
-        step: 1,
+        number: 1,
         title: 'Discovery',
         description:
-          'A structured conversation about how you live, what you love, and what is not working. We visit the space and read it carefully before forming any opinions.',
+          'A thorough conversation about how you live, what you value, and what the space must do. We visit the site at different times of day, read the architecture, and understand what we are working with before we propose anything.'
       },
       {
-        step: 2,
+        number: 2,
         title: 'Concept',
         description:
-          'We develop a single strong direction — not three options — rooted in the brief and the particularities of the space. Mood boards, material samples, and spatial sketches.',
+          'A spatial and material direction presented in a concise document: reference, palette, key pieces, and the logic connecting them. This is where we make the argument for the design before committing to it.'
       },
       {
-        step: 3,
+        number: 3,
         title: 'Design Development',
         description:
-          'The concept becomes a set of precise drawings, specifications, and schedules. Every decision is documented. Every supplier is briefed.',
+          'Floor plans, elevations, detailed joinery drawings, complete material and furniture specifications. Every decision documented with enough precision that contractors can build from it.'
       },
       {
-        step: 4,
-        title: 'Realisation',
+        number: 4,
+        title: 'Delivery',
         description:
-          'We coordinate all trades, manage delivery schedules, and maintain quality control from the first day on site to the last. You receive regular progress reports.',
-      },
-      {
-        step: 5,
-        title: 'Completion',
-        description:
-          'Final installation, styling, and a thorough snag review. The project is finished when it is right, not when the deadline arrives.',
-      },
+          'We manage the contractor relationship through construction, source and place furniture and objects, and oversee installation to completion. We are present at every stage that matters.'
+      }
     ],
+    deliverables: [
+      'Full concept presentation',
+      'Spatial plans and elevations',
+      'Complete material specification',
+      'Furniture and lighting schedule',
+      'Contractor coordination',
+      'Installation oversight',
+      'Snag review and sign-off'
+    ]
   },
   {
-    id: 's2',
+    id: 'renovation-consulting',
     title: 'Renovation Consulting',
-    subtitle: 'Expert guidance at any stage',
     description:
-      'For clients who are managing their own renovation but need a practised eye to set them on the right course, resolve a problem, or review decisions before they become expensive. We offer structured consulting engagements — a single intensive session, a short retainer, or a series of reviews at key project stages — designed to give you exactly the input you need without the overhead of a full commission.',
+      'Targeted design guidance for clients who have contractors in place or prefer to manage delivery themselves. We define the design direction with precision — materials, spatial interventions, key furniture pieces — and hand over a specification complete enough to execute without us. A focused service for clients who know what they need.',
+    processSteps: [
+      {
+        number: 1,
+        title: 'Site Review',
+        description:
+          'We assess the existing space, understand the scope of the renovation, and identify the decisions that will shape the outcome. A structured visit with follow-up questions, not a general look around.'
+      },
+      {
+        number: 2,
+        title: 'Design Direction',
+        description:
+          'A written and visual brief defining the material palette, spatial moves, and furniture approach. Specific enough to price and build from; clear enough to adapt where the site demands it.'
+      },
+      {
+        number: 3,
+        title: 'Specification Handover',
+        description:
+          'A complete package of references, schedules, and sourcing guidance. We remain available for questions during execution at an agreed rate.'
+      }
+    ],
     deliverables: [
-      'Project brief and scope review',
-      'Material palette recommendations',
-      'Contractor and supplier recommendations',
-      'Layout and spatial planning review',
-      'Written summary of findings and recommendations',
-      'Follow-up Q&A session',
-    ],
-    process: [
-      {
-        step: 1,
-        title: 'Initial Review',
-        description:
-          'You share your plans, references, and concerns. We read everything before we meet.',
-      },
-      {
-        step: 2,
-        title: 'Site or Video Session',
-        description:
-          'An intensive working session — on-site or remote — where we work through the specific questions and decisions you are facing.',
-      },
-      {
-        step: 3,
-        title: 'Written Recommendations',
-        description:
-          'A clear written summary of our findings, recommendations, and any follow-up actions — yours to share with your contractor or architect.',
-      },
-    ],
+      'Site review and written assessment',
+      'Material and finish specification',
+      'Furniture and fixture recommendations',
+      'Sourcing guidance with supplier contacts',
+      'Design direction document',
+      'Two rounds of revision'
+    ]
   },
   {
-    id: 's3',
+    id: 'furniture-curation',
     title: 'Furniture Curation',
-    subtitle: 'Objects chosen with the same care as architecture',
     description:
-      'Furniture and objects are not afterthoughts — they complete the work. We offer a standalone curation service for clients who have finished the architecture and need a practised eye to select, source, and position the pieces that will make the space alive. We draw on a network of makers, galleries, and vintage dealers built over nine years of practice, and we present only what is right for your specific space.',
+      'A selection service for spaces that need considered objects, not a shopping list. We work from your existing interior — its palette, its proportions, its mood — and source furniture, lighting, and objects that belong. We access makers and ateliers that do not sell through retail, and we know the difference between a piece that photographs well and one that improves with fifteen years of daily use.',
+    processSteps: [
+      {
+        number: 1,
+        title: 'Interior Assessment',
+        description:
+          'We spend time in the space — or study it thoroughly through documentation — to understand its proportions, light, and existing character. The curation begins with listening.'
+      },
+      {
+        number: 2,
+        title: 'Curation & Sourcing',
+        description:
+          'We develop a curated selection from our network of European makers, ateliers, and carefully chosen secondary-market sources. Each piece is chosen for its relationship to the room, not for its label.'
+      },
+      {
+        number: 3,
+        title: 'Presentation & Refinement',
+        description:
+          'A visual presentation of the proposed selection with placement drawings, dimensions, and lead times. We refine until the selection is right.'
+      }
+    ],
     deliverables: [
-      'Curated furniture and object selection with rationale',
-      'Scaled floor plan with positioning',
-      'Access to trade suppliers and exclusive pieces',
-      'Vintage and antique sourcing',
-      'Procurement management and delivery coordination',
-      'Final placement and styling',
-    ],
-    process: [
-      {
-        step: 1,
-        title: 'Space Reading',
-        description:
-          'We spend time in (or with plans of) the finished space, identifying its scale, light, and character before making any recommendations.',
-      },
-      {
-        step: 2,
-        title: 'Selection Presentation',
-        description:
-          'A curated edit of furniture, lighting, and objects — presented with context, dimensions, and positioning rationale.',
-      },
-      {
-        step: 3,
-        title: 'Procurement & Installation',
-        description:
-          'We manage all orders, deliveries, and the final installation day. You arrive to a finished room.',
-      },
-    ],
-  },
+      'Interior assessment report',
+      'Curated furniture selection with placement plan',
+      'Lighting and object recommendations',
+      'Full sourcing with pricing and lead times',
+      'Order management and delivery coordination',
+      'Two rounds of revision'
+    ]
+  }
 ];

@@ -5,42 +5,40 @@ export interface Project {
   slug: string;
   title: string;
   category: ProjectCategory;
-  location: string;
   year: number;
-  scope: string;
-  area: string;
+  location: string;
+  scope: string[];
   description: string;
   shortDescription: string;
-  tags: string[];
+  area?: string;
+  coverImage: string;
+  images: string[];
   featured: boolean;
-  coverAlt: string;
-  imageCount: number;
 }
 
-export interface Founder {
+export interface TeamMember {
   id: string;
   name: string;
-  title: string;
+  role: string;
   bio: string;
-  expertise: string[];
+  image: string;
 }
 
 export interface Service {
   id: string;
   title: string;
-  subtitle: string;
   description: string;
+  processSteps: ProcessStep[];
   deliverables: string[];
-  process: ProcessStep[];
 }
 
 export interface ProcessStep {
-  step: number;
+  number: number;
   title: string;
   description: string;
 }
 
-export interface PressItem {
+export interface PressMention {
   id: string;
   publication: string;
   title: string;
@@ -48,30 +46,17 @@ export interface PressItem {
   url?: string;
 }
 
-export type BudgetRange =
-  | 'under-50k'
-  | '50k-150k'
-  | '150k-350k'
-  | '350k-750k'
-  | 'over-750k';
-
-export type ProjectType =
-  | 'residential-new'
-  | 'residential-renovation'
-  | 'hospitality'
-  | 'commercial'
-  | 'furniture-curation'
-  | 'consulting';
-
-export interface InquiryForm {
-  firstName: string;
-  lastName: string;
+export interface InquiryFormData {
+  name: string;
   email: string;
-  phone: string;
-  projectType: ProjectType | '';
-  budgetRange: BudgetRange | '';
-  location: string;
+  projectType: ProjectCategory | 'Other';
+  budgetRange: BudgetRange;
   message: string;
 }
 
-export type FormErrors = Partial<Record<keyof InquiryForm, string>>;
+export type BudgetRange =
+  | 'Under €50k'
+  | '€50k – €150k'
+  | '€150k – €500k'
+  | '€500k – €1M'
+  | 'Above €1M';
