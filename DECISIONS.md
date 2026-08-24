@@ -104,7 +104,7 @@ _Significant architectural and scope choices, with engineering rationale. Update
 **Decision:** The 6 canonical project slugs are those defined in SPEC.md §3, used in `projects.ts` and URL routing. Marco's site copy maps to these slugs.
 
 | Slug | Name in copy |
-|------|--------------|
+|------|-------------|
 | `maison-vernet` | Maison Vernet |
 | `hotel-les-graines` | Hôtel Les Graines |
 | `appartement-bastille` | Appartement Bastille |
@@ -113,6 +113,32 @@ _Significant architectural and scope choices, with engineering rationale. Update
 | `auberge-du-moulin` | Auberge du Moulin |
 
 **Rationale:** Slugs are URL identifiers and must be stable. Copy project names can be display-formatted freely; slugs must match `generateStaticParams` output exactly.
+
+---
+
+## D-010 · Test runner split: Jest (core CI) + Playwright (optional E2E)
+
+**Date:** Post-QA-push  
+**Status:** Accepted  
+**Decided by:** Marco (docs) after Priya (QA) flagged REVIEW.md R-01
+
+**Context:**  
+Priya's `qa-test-suite-summary.md` referenced Vitest (for unit tests) and Playwright (for E2E) in its runner labels. However, `package.json` only has Jest 29 configured (`"test": "jest --passWithNoTests"`). ARCHITECTURE.md's earlier aspiration included Vitest. This created a three-way inconsistency between the QA summary, the architecture doc, and the actual repo.
+
+**Decision:**  
+- **`npm test`** runs Jest 29 + React Testing Library only. This is the canonical CI command and the only test command a stranger needs to know.  
+- **Playwright** E2E specs (in `tests/e2e/`) are present in the repo for future extension. They are not installed in `devDependencies` by default. A developer installs Playwright locally with `npx playwright install` when needed.  
+- **Vitest** is not used in this project. The reference in `qa-test-suite-summary.md` was a naming artefact from the QA plan draft; the final test files were written in Jest syntax.  
+- ARCHITECTURE.md's reference to Vitest is understood as aspirational/planned; the actual implementation is Jest.
+
+**Rationale:**  
+- Migrating from Jest to Vitest inside a 24-hour time box is a scope-expansion risk with no customer-visible benefit.  
+- Playwright E2E tests are valuable for regression testing but are not required for a static marketing site launch; they are left as a "next developer" extension point.  
+- Keeping `npm test` as the single required command keeps CI configuration minimal.
+
+**Consequences:**  
+- REVIEW.md R-01 (Major) is resolved by this ADR and the README update that accompanies it.  
+- A future developer wishing to add Playwright to CI should add it to `devDependencies` and create a `playwright.config.ts`.
 
 ---
 
