@@ -1,58 +1,62 @@
-import Nav from '@/components/layout/Nav';
-import Footer from '@/components/layout/Footer';
-import ContactForm from '@/components/contact/ContactForm';
-import styles from './page.module.css';
+import { Metadata } from 'next';
+import { ContactForm } from '@/components/ContactForm/ContactForm';
+import styles from './Contact.module.css';
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Contact',
-  description: 'Start a conversation with Atelier Nord about your project.'
+  description: 'Begin a conversation with Atelier Nord. Tell us about your project and we will be in touch within two working days.',
 };
 
 export default function ContactPage() {
   return (
-    <>
-      <Nav />
-      <main style={{ paddingTop: 'var(--nav-height)' }}>
+    <div style={{ paddingTop: 'var(--nav-height)' }}>
+      <section className="section">
         <div className="container">
           <div className={styles.layout}>
-            {/* Left col */}
-            <div className={styles.info}>
-              <p className={styles.eyebrow}>Get in touch</p>
-              <h1 className={styles.heading}>Start a project</h1>
-              <p className={styles.intro}>
-                We read every enquiry. Tell us about your project and we will
-                respond within two working days.
+            <div className={styles.intro}>
+              <p className="eyebrow">Get in Touch</p>
+              <h1 style={{
+                fontFamily: 'var(--font-display)',
+                fontWeight: 300,
+                fontSize: 'clamp(2rem, 4vw, 3.5rem)',
+                letterSpacing: 'var(--tracking-tight)',
+                lineHeight: 'var(--leading-tight)',
+                color: 'var(--color-text-primary)',
+                marginTop: 'var(--space-4)',
+                marginBottom: 'var(--space-8)',
+              }}>
+                Tell us about<br />
+                <em style={{ fontStyle: 'italic', color: 'var(--color-accent)' }}>your project.</em>
+              </h1>
+              <p className={styles.introText}>
+                We work with a small number of clients at any one time. If our practice feels like the right fit, we would like to hear from you. We respond to every inquiry within two working days.
               </p>
 
               <div className={styles.studioDetails}>
-                <div className={styles.detail}>
+                <div className={styles.detailGroup}>
                   <span className={styles.detailLabel}>Studio</span>
                   <address className={styles.detailValue}>
-                    7 Rue de Bretagne<br />
-                    75003 Paris, France
+                    12 Rue du Bac<br />
+                    75007 Paris, France
                   </address>
                 </div>
-                <div className={styles.detail}>
+                <div className={styles.detailGroup}>
                   <span className={styles.detailLabel}>Email</span>
-                  <a href="mailto:studio@ateliernord.fr" className={styles.detailLink}>
-                    studio@ateliernord.fr
-                  </a>
+                  <a href="mailto:bonjour@ateliernord.fr" className={styles.detailLink}>bonjour@ateliernord.fr</a>
                 </div>
-                <div className={styles.detail}>
-                  <span className={styles.detailLabel}>New commissions</span>
-                  <span className={styles.detailValue}>Open for 2025</span>
+                <div className={styles.detailGroup}>
+                  <span className={styles.detailLabel}>Phone</span>
+                  <a href="tel:+33142860000" className={styles.detailLink}>+33 1 42 86 00 00</a>
                 </div>
               </div>
             </div>
 
-            {/* Right col — form */}
-            <div className={styles.formWrap}>
+            <div className={styles.formWrapper}>
               <ContactForm />
             </div>
           </div>
         </div>
-      </main>
-      <Footer />
-    </>
+      </section>
+    </div>
   );
 }
